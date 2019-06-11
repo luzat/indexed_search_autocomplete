@@ -1,18 +1,18 @@
 <?php
-if (!defined('TYPO3_MODE')) {
-    die('Access denied.');
-}
+
+defined('TYPO3_MODE') or die('Access denied.');
 
 /***************
  * Define TypoScript as content rendering template
  */
-$GLOBALS['TYPO3_CONF_VARS']['FE']['contentRenderingTemplates'][] = 'indexed_search_autocomplete/Configuration/TypoScript/';
+$GLOBALS['TYPO3_CONF_VARS']['FE']['contentRenderingTemplates'][] = 'indexedsearchautocomplete/Configuration/TypoScript/';
 
 
 /***************
  * Make the extension configuration accessible
  */
 $myConf = $GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf'][$_EXTKEY];
+
 if (!is_array($myConf)) {
     $myConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf'][$_EXTKEY]);
 }
@@ -24,15 +24,9 @@ if (!$myConf['disableJquerySource']) {
 
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-	'ID.' . $_EXTKEY,
-	'Search',
-	array(
-		'Search' => 'search',
-		
-	),
-	// non-cacheable actions
-	array(
-		'Search' => 'search',
-		
-	)
+    'Id.' . $_EXTKEY,
+    'Search',
+    ['Search' => 'search'],
+    // non-cacheable actions
+    ['Search' => 'search']
 );

@@ -13,43 +13,42 @@
  *
  * ************************************************************* */
 
-namespace ID\indexedSearchAutocomplete\Controller;
+namespace Id\IndexedSearchAutocomplete\Controller;
+
+use TYPO3\CMS\Extbase\Annotation\Inject;
+use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 /**
  * EntryController
  */
-class SearchController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController {
+class SearchController extends ActionController {
 
     /**
      * Search repository
      *
      * @var \TYPO3\CMS\IndexedSearch\Domain\Repository\IndexSearchRepository
      */
-    protected $searchRepository = null;
+    protected $searchRepository;
     
      /**
       * Search functions
       * 
-      * @var ID\IndexedSearchAutocomplete\Service\SearchService
-      * @inject
+      * @var \Id\IndexedSearchAutocomplete\Service\SearchService
+      * @Inject
       */
-    protected $searchService = null;
+    protected $searchService;
 
     /**
      * action search
      *
      * @return string
      */
-    public function SearchAction() {
+    public function searchAction() {
         $arg = $_REQUEST;
         $searchmode = $arg['m'];
-
-        $result = [];
-        if ($searchmode == 'word') {
-            $result = $this->searchService->searchAWord($arg, $arg['mr']);
-        } else {
-            $result = $this->searchService->searchASite($arg, $arg['mr']);
-        }
+        $result = $searchmode === 'word'
+            ? $this->searchService->searchAWord($arg, $arg['mr'])
+            : $this->searchService->searchASite($arg, $arg['mr']);
 
         foreach ($result as $key => $value) {
             $this->view->assign($key, $value);

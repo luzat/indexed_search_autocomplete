@@ -8,15 +8,14 @@ $EM_CONF[$_EXTKEY] = [
     'category' => 'fe',
     'constraints' => [
         'depends' => [
-            'typo3' => '8.7.0-9.5.99',
+            'typo3' => '9.5.0-9.5.99',
         ],
         'conflicts' => [
-
         ],
     ],
     'autoload' => [
         'psr-4' => [
-            'ID\\IndexedSearchAutocomplete\\' => 'Classes'
+            'Id\\IndexedSearchAutocomplete\\' => 'Classes'
         ],
     ],
     'state' => 'stable',

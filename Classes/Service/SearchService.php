@@ -13,20 +13,23 @@
  *
  * ************************************************************* */
 
-namespace ID\indexedSearchAutocomplete\Service;
+namespace Id\IndexedSearchAutocomplete\Service;
 
 use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+use TYPO3\CMS\IndexedSearch\Domain\Repository\IndexSearchRepository;
 
 /**
  * EntryController
  */
-class SearchService implements \TYPO3\CMS\Core\SingletonInterface  {
+class SearchService implements SingletonInterface  {
 
     /**
      * Search repository
      *
-     * @var \TYPO3\CMS\IndexedSearch\Domain\Repository\IndexSearchRepository
+     * @var IndexSearchRepository
      */
     protected $searchRepository = null;
 
@@ -75,14 +78,13 @@ class SearchService implements \TYPO3\CMS\Core\SingletonInterface  {
 
     public function searchASite($arg, $maxResults) {
         $languageId = $GLOBALS['TSFE']->sys_language_uid;
-        $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
+        $objectManager = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
 
         $configurationManager = $objectManager->get('TYPO3\\CMS\\Extbase\\Configuration\\ConfigurationManagerInterface');
         
         $setting = $configurationManager->getConfiguration(
-                \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
+                ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
         );
-
 
         $search = [
             [
@@ -91,7 +93,7 @@ class SearchService implements \TYPO3\CMS\Core\SingletonInterface  {
             ]
         ];
 
-        $this->searchRepository = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\IndexedSearch\Domain\Repository\IndexSearchRepository::class);
+        $this->searchRepository = GeneralUtility::makeInstance(IndexSearchRepository::class);
 
         $settings = $setting['plugin.']['tx_indexedsearch.']['settings.'];
         $searchData = [
@@ -121,5 +123,4 @@ class SearchService implements \TYPO3\CMS\Core\SingletonInterface  {
             'mode' => 'link'
         ];
     }
-
 }

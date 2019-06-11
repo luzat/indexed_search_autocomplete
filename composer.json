@@ -1,5 +1,5 @@
 {
-  "name": "ID/indexed_search_autocomplete",
+  "name": "id/indexed_search_autocomplete",
   "type": "typo3-cms-extension",
   "description": "Indexed Search Autocomplete",
   "homepage": "http://www.ingeniumdesign.de",
@@ -24,14 +24,13 @@
     "indexed_search_autocomplete": "*"
   },
   "require": {
-    "typo3/cms-core": ">=8.7.0"
+    "typo3/cms-core": ">=9.5.0"
   },
   "suggest": {
-
   },
   "autoload": {
     "psr-4": {
-      "ID\\IndexedSearchAutocomplete\\": "Classes/"
+      "Id\\IndexedSearchAutocomplete\\": "Classes/"
     }
   }
 }

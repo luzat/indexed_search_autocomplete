@@ -35,13 +35,12 @@ search {
     typeNum = 7423794
     config {
         disableAllHeaderCode = 1
-        additionalHeaders = Content-type:text/html
+        additionalHeaders = Content-Type: text/html
         xhtml_cleaning = 0
         debug = 0
         no_cache = 1
         admPanel = 0
     }
 
-    10 = COA
     10 < tt_content.list.20.indexedsearchautocomplete_search
 }
